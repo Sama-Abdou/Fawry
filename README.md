@@ -1,3 +1,93 @@
+# 📚 Quantum Book Store – Java Implementation
+
+This project implements an **extensible online bookstore system** in Java that handles various types of books (`PaperBook`, `EBook`, `DemoBook`), supports inventory management, and processes customer purchases.
+
+---
+
+## 📐 UML Diagram
+
+![UML Diagram](UML2.png)
+
+---
+
+## 🧱 System Overview
+
+### 1. `Book` (abstract class)
+- **Purpose**: Base class for all books. Encapsulates shared attributes like `isbn`, `title`, `year`, and `price`.
+- **Why `abstract`**: Prevents direct instantiation. Only specific types of books (e.g., `PaperBook`, `EBook`, `DemoBook`) can be created.
+- **Access Modifiers**:
+  - `protected` for fields so subclasses can access them.
+  - `public` for methods to expose book properties.
+- **Key Methods**:
+  - `inStock(quantity)`: Checks availability.
+  - `buy(quantity, email, address)`: Handles purchase logic.
+  - `forSale()`: Indicates whether the book is purchasable.
+
+---
+
+### 2. `PaperBook` (extends `Book`)
+- **Purpose**: Represents a physical book with limited stock that can be shipped.
+- **Fields**:
+  - `inStockQuantity`: Number of copies available.
+- **Methods**:
+  - Overrides `inStock()`, `buy()`, and `forSale()`.
+- **Uses**:
+  - `ShippingService.send()`: Sends the book to the customer.
+
+---
+
+### 3. `EBook` (extends `Book`)
+- **Purpose**: Represents a digital book that can be emailed.
+- **Fields**:
+  - `fileType`: e.g., PDF, EPUB.
+- **Methods**:
+  - Always in stock (unlimited).
+  - Sends the book via email.
+- **Uses**:
+  - `MailService.send()`: Sends the file to the customer’s email.
+
+---
+
+### 4. `DemoBook` (extends `Book`)
+- **Purpose**: Represents a showcase or sample book that is **not for sale**.
+- **Methods**:
+  - `inStock()` always returns false.
+  - `buy()` throws an error.
+  - `forSale()` returns false.
+
+---
+
+### 5. `BookStore`
+- **Purpose**: Manages the inventory of all books.
+- **Fields**:
+  - `inventory`: A `Map` from ISBN to `Book`.
+- **Methods**:
+  - `add(Book)`: Adds a book to inventory.
+  - `remove(String)`: Removes a book by ISBN.
+  - `removeOutdatedBooks(maxAge, year)`: Removes old books.
+  - `buyBook(isbn, qty, email, address)`: Handles complete purchase logic.
+- **Relationships**:
+  - `◆` Composition: Owns many `Book` objects.
+  - `▷` Uses `Book` methods like `inStock`, `buy`, `forSale`.
+
+---
+
+### 6. `ShippingService`
+- **Purpose**: Utility class to ship paper books.
+- **Method**:
+  - `static send(Book, address)`: Simulates shipping.
+- **Why `static`**: No object state; acts as a helper.
+
+---
+
+### 7. `MailService`
+- **Purpose**: Utility class to email eBooks.
+- **Method**:
+  - `static send(Book, email)`: Simulates email sending.
+- **Why `static`**: Same reason as above.
+
+---
+
 # 🛒 E-Commerce System – Java Implementation
 
 This project implements a simplified e-commerce system in Java that supports products (some expirable, some shippable), customer checkout with cart functionality, and shipping management.
