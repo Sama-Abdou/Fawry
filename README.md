@@ -90,7 +90,7 @@ This project implements an **extensible online bookstore system** in Java that h
 
 ## 🧪 Test 
 
-![Running Program](running program.png)
+![Running Program](running_program.png)
 
 ---
 
