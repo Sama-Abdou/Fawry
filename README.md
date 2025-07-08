@@ -88,6 +88,12 @@ This project implements an **extensible online bookstore system** in Java that h
 
 ---
 
+## 🧪 Test 
+
+![Running Program](running program.png)
+
+---
+
 # 🛒 E-Commerce System – Java Implementation
 
 This project implements a simplified e-commerce system in Java that supports products (some expirable, some shippable), customer checkout with cart functionality, and shipping management.
